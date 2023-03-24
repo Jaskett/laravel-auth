@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title', 255)->unique();
             $table->text('description');
             $table->string('link', 255)->unique();
-            $table->string('peview', 255);
+            $table->string('preview', 255);
             $table->timestamps();
         });
     }

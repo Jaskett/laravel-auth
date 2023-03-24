@@ -13,6 +13,6 @@ class Project extends Model
         'title',
         'description',
         'link',
-        'peview'
+        'preview'
     ];
 }
