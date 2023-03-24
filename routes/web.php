@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// Controllers
+use App\Http\Controllers\Admin\ProjectController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +23,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
