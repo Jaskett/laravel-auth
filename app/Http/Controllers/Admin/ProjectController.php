@@ -10,6 +10,9 @@ use App\Http\Requests\UpdateProjectRequest;
 //Models
 use App\Models\Project;
 
+// Helpers
+use Illuminate\Support\Facades\Storage;
+
 class ProjectController extends Controller
 {
     /**
@@ -43,6 +46,11 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $data = $request->validate();
+
+        if(array_key_exists('img', $data)) {
+            $imgPath = Storage::put('projects', $data['img']);
+            $data['img'] = $imgPath;
+        }
 
         $newProject = Project::create($data);
         return redirect()->route('admin.projects.show', $newProject->id)->with('success', 'New project created correctly');
@@ -85,6 +93,15 @@ class ProjectController extends Controller
     {
         $data = $request->validate();
 
+        if(array_key_exists('img', $data)) {
+            $imgPath = Storage::put('projects', $data['img']);
+            $data['img'] = $imgPath;
+
+            if($project->img) {
+                Storage::delete($project->img);
+            }
+        }
+
         $project->update($data);
         return redirect()->route('admin.projects.show', $project->id)->with('success', 'Project update correctly');
     }
@@ -97,7 +114,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        Storage::delete($project->img);
+
         $project->delete();
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('success', 'Project deleted correctly');
     }
 }

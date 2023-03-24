@@ -30,7 +30,12 @@
     <div class="card p-5">
         <div class="row justify-content-center">
             <div class="col-md-3">
-                <img src="{{ $project->preview }}" alt="{{ $project->title }}" class="w-100">
+                @if (str_contains($project->img, 'https') )
+                <img src="{{ $project->img }}" alt="{{ $project->title }}" class="w-100">
+
+                @else
+                    <img src="{{ asset('storage/'.$project->img) }}" alt="{{ $project->title }}" class="w-100">
+                @endif
             </div>
             <div class="col-md-7">
                 <h2>{{ $project->title }}</h2>

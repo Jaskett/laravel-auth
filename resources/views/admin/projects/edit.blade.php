@@ -12,6 +12,7 @@
                 action="{{ route('admin.projects.update', $project->id) }}"
                 method="POST"
                 class="mt-5"
+                enctype="multipart/form-data"
             >
                 @csrf
                 @method('PUT')
@@ -76,20 +77,27 @@
                 </div>
 
                 <div class="mb-3 row">
-                    <label for="preview" class="col-form-label col-2">
-                        Preview link*
+                    <label for="img" class="form-label">
+                        Preview image*
                     </label>
-                    <div class="col-10">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            @if (str_contains($project->img, 'https') )
+                                <img src="{{ $project->img }}" alt="{{ $project->title }}" class="w-50">
+
+                                @else
+                                    <img src="{{ asset('storage/'.$project->img) }}" alt="{{ $project->title }}" class="w-50">
+                            @endif
+                        </div>
+
                         <input
-                            type="text"
-                            id="preview"
-                            name="preview"
-                            class="form-control @error ('preview') is-invalid @enderror"
-                            value="{{ old('preview', $project->preview ) }}"
-                            max="255"
-                            required
+                            type="file"
+                            id="img"
+                            name="img"
+                            class="form-control @error ('img') is-invalid @enderror"
+                            accept="image/*"
                         >
-                        @error('preview')
+                        @error('img')
                             <span class="d-block mt-2 text-danger">{{ $message }}</span>
                         @enderror
                     </div>

@@ -24,7 +24,11 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'=> 'required|max:255|unique:projects,title',
+            'description'=> 'required|max:3000',
+            'link'=> 'required|max:255|url|unique:projects,link',
+            'preview'=> 'required|max:255|url',
+            'img'=> 'required|max:2048|image',
         ];
     }
 }

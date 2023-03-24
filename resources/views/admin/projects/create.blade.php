@@ -11,6 +11,7 @@
                 action="{{ route('admin.projects.store') }}"
                 method="POST"
                 class="mt-5"
+                enctype="multipart/form-data"
             >
                 @csrf
 
@@ -74,20 +75,19 @@
                 </div>
 
                 <div class="mb-3 row">
-                    <label for="preview" class="col-form-label col-2">
-                        Preview link*
+                    <label for="img" class="col-form-label col-2">
+                        Preview image*
                     </label>
                     <div class="col-10">
                         <input
-                            type="text"
-                            id="preview"
-                            name="preview"
-                            class="form-control @error ('preview') is-invalid @enderror"
-                            value="{{ old('preview') }}"
-                            max="255"
-                            required
+                        type="file"
+                        id="img"
+                        name="img"
+                        class="form-control @error ('img') is-invalid @enderror"
+                        required
+                        accept="image/*"
                         >
-                        @error('preview')
+                        @error('img')
                             <span class="d-block mt-2 text-danger">{{ $message }}</span>
                         @enderror
                     </div>

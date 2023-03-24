@@ -6,6 +6,12 @@
 <div class="container-fluid mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if (session('success'))
+                <div class="alert alert-success mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
+            
             <div class="mb-3">
                 <a href="{{ route('admin.projects.create') }}" class="btn btn-primary text-light">
                     New project

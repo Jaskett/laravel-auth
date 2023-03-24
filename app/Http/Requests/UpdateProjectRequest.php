@@ -39,7 +39,7 @@ class UpdateProjectRequest extends FormRequest
                 'url',
                 Rule::unique('projects')->ignore($this->project)
             ],
-            'preview'=> 'required|max:255|url',
+            'img'=> 'max:2048|image',
         ];
     }
 }
