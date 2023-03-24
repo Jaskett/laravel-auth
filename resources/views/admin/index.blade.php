@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('page_name') | Projects  @endsection
+
 @section('content')
 <div class="container-fluid mt-4">
     <div class="row justify-content-center">
@@ -10,11 +12,11 @@
                 <div class="card-body">
                     <ul class="list-group">
                         @foreach ($projects as $project)
-                            <li class="list-group-item">
+                            <li class="list-group-item p-4">
                                 <strong>Title:</strong> {{ $project->title }}
                                 <br>
                                 <strong>Preview:</strong>
-                                <img class="w-50" src="{{ $project->preview }}" alt="{{ $project->title }}">
+                                <img class="w-50 d-block" src="{{ $project->preview }}" alt="{{ $project->title }}">
                                 <br>
                                 <strong>Link:</strong> {{ $project->link }}
                                 <br>
